@@ -12,25 +12,33 @@
 #include <avr/power.h>
 #endif
 
-#define NEOPIN          6
-#define NEOPIXELS      10
+#define NEOCTRLPIN      6
+#define NEOPIXELS       8
 #define POLLTMOUT      50
 #define PIN_STATUS     13
 
 #define LENGTH(x)      (sizeof(x)/sizeof(*x))
+
+#define LED_COLOR_GREEN 0x00FF00
+#define LED_COLOR_RED   0xFF0000
 
 const struct entry {
 	const String key;
 	const unsigned pin;
 	const uint32_t color;
 } collection[] = {
-	{ "pl_stonehenge", 0, 0xFF0000 },
-	{ "pl_kent",       0, 0x00FF00 },
-	{ "pl_cornwall",   0, 0x0000FF },
+	{ "pl_chertsey",         0, LED_COLOR_RED   },
+	{ "pl_hertfordshire",    1, LED_COLOR_GREEN },
+	{ "pl_kits_coty_house",  2, LED_COLOR_RED   },
+	{ "pl_northumbeland",    3, LED_COLOR_GREEN },
+	{ "pl_kent",             4, LED_COLOR_GREEN },
+	{ "pl_cornwall",         5, LED_COLOR_GREEN },
+	{ "pl_isle_of_anglesey", 6, LED_COLOR_GREEN },
+	{ "pl_stonehenge",       7, LED_COLOR_RED   },
 };
 
 YunServer server = YunServer();
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(NEOPIXELS, NEOPIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NEOPIXELS, NEOCTRLPIN, NEO_GRB + NEO_KHZ800);
 
 void setup(void) {
 #if defined (__AVR_ATtiny85__)
@@ -41,11 +49,10 @@ void setup(void) {
 	server.listenOnLocalhost();
 	server.begin();
 	strip.begin();
-
-	init();
+	strip_init();
 }
 
-void init(void) {
+void strip_init(void) {
 	for (size_t i = 0; i < NEOPIXELS; ++i) {
 		strip.setPixelColor(i, LOW);
 	}
