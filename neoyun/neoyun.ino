@@ -27,9 +27,9 @@ const struct entry {
 	const unsigned pin;
 	const uint32_t color;
 } collection[] = {
-	{ "pl_chertsey",         0, LED_COLOR_RED   },
+	{ "pl_kits_coty_house",  0, LED_COLOR_RED   },
 	{ "pl_hertfordshire",    1, LED_COLOR_GREEN },
-	{ "pl_kits_coty_house",  2, LED_COLOR_RED   },
+	{ "pl_maidstone",        2, LED_COLOR_RED   },
 	{ "pl_northumbeland",    3, LED_COLOR_GREEN },
 	{ "pl_kent",             4, LED_COLOR_GREEN },
 	{ "pl_cornwall",         5, LED_COLOR_GREEN },
